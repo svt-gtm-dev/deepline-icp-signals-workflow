@@ -1,0 +1,17 @@
+{
+  "min_icp_quality_score": 80.0,
+  "apply_icp_proposals_by_default": true,
+  "icp_weight": 0.55,
+  "signal_weight": 0.45,
+  "signal_weights": {
+    "company_expansion": 25,
+    "recent_investment": 20,
+    "active_hiring": 20,
+    "new_facility_or_office": 20,
+    "new_market_entry": 15
+  },
+  "custom_positive_signals": [],
+  "default_export_format": "all",
+  "default_connector_target": "hubspot-mcp",
+  "min_export_score": 0.0
+}

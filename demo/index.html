@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Deepline Signals Workflow — Industrial &amp; Logistics LATAM Growth</title>
+<style>
+:root{--bg:#F8FAFC;--sf:#FFFFFF;--sf2:#F1F5F9;--bd:#E2E8F0;--tx:#0F172A;--mu:#475569;--ac:#0369A1;--ac2:#0F766E;--ok:#15803D;--warn:#B45309;--r:8px;--f:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--m:ui-monospace,SFMono-Regular,Menlo,monospace}
+[data-theme="dark"]{--bg:#090D16;--sf:#111827;--sf2:#1E293B;--bd:#334155;--tx:#F8FAFC;--mu:#94A3B8;--ac:#38BDF8;--ac2:#2DD4BF;--ok:#4ADE80;--warn:#FBBF24}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--f);line-height:1.5}
+button,select,input{font:inherit;color:inherit}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.wrap{max-width:1520px;margin:0 auto;padding:20px 24px 48px}
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--bd)}
+.brand h1{margin:0;font-size:1.25rem;letter-spacing:-.02em}
+.brand p{margin:2px 0 0;font-size:.86rem;color:var(--mu)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{border:1px solid var(--bd);background:var(--sf);padding:7px 12px;border-radius:6px;cursor:pointer;font-size:.84rem;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.btn.pri{background:var(--ac);border-color:var(--ac);color:#fff}
+.grid{display:grid;grid-template-columns:360px minmax(0,1fr);gap:20px;margin-top:20px;align-items:start}
+@media(max-width:980px){.grid{grid-template-columns:1fr}}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px}
+.card h2{margin:0 0 10px;font-size:.98rem;display:flex;align-items:center;justify-content:space-between}
+.kpi{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.kpi strong{font-size:1.9rem;color:var(--ac);letter-spacing:-.03em}
+.badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.75rem;font-weight:600;background:var(--sf2);border:1px solid var(--bd)}
+.badge.ok{color:var(--ok)}
+.badge.warn{color:var(--warn)}
+.dim-row{margin:8px 0;font-size:.82rem}
+.dim-head{display:flex;justify-content:space-between;margin-bottom:3px}
+.bar{height:6px;background:var(--sf2);border-radius:4px;overflow:hidden}
+.bar>span{display:block;height:100%;background:var(--ac)}
+.slider-row{margin:10px 0;font-size:.83rem}
+.slider-row label{display:flex;justify-content:space-between;margin-bottom:2px}
+.slider-row input[type=range]{width:100%;accent-color:var(--ac)}
+.q-list{margin:10px 0 0;padding-left:18px;font-size:.82rem;color:var(--mu)}
+.q-list li{margin-bottom:6px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.search{padding:7px 11px;border:1px solid var(--bd);border-radius:6px;background:var(--sf);min-width:230px;font-size:.86rem}
+.lead-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:14px 16px;margin-bottom:10px}
+.lead-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:flex-start}
+.lead-title{font-weight:700;font-size:1rem}
+.lead-meta{font-size:.84rem;color:var(--mu);margin-top:2px}
+.scores{display:flex;gap:8px;flex-wrap:wrap}
+.pill{padding:4px 9px;border-radius:6px;background:var(--sf2);border:1px solid var(--bd);font-size:.8rem;font-weight:600}
+.pill.tot{background:var(--ac);border-color:var(--ac);color:#fff}
+.sigs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.sig-tag{font-size:.77rem;padding:3px 8px;border-radius:5px;background:var(--sf2);border:1px solid var(--bd)}
+.sig-tag.ver{border-left:3px solid var(--ok)}
+.sig-tag.hyp{border-left:3px solid var(--warn)}
+.angle{margin-top:10px;padding-top:9px;border-top:1px solid var(--bd);font-size:.84rem;color:var(--mu)}
+.export-box{margin-top:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px}
+pre{background:var(--sf2);border:1px solid var(--bd);border-radius:6px;padding:12px;overflow:auto;font-family:var(--m);font-size:.78rem;max-height:280px;white-space:pre-wrap}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1 id="wf-title">Deepline ICP &amp; Signals Workflow</h1>
+      <p id="wf-sub">Modelo de Calidad ICP + Extracción Deepline + Scoring Dual &amp; Exportación Multi-Formato</p>
+    </div>
+    <div class="actions">
+      <button class="btn" id="btn-theme" type="button">Dark / Light</button>
+      <button class="btn" id="btn-copy-txt" type="button">Copiar Reporte Texto</button>
+      <button class="btn" id="btn-dl-json" type="button">Exportar JSON</button>
+      <button class="btn" id="btn-dl-csv" type="button">Exportar CSV</button>
+      <button class="btn pri" id="btn-show-mcp" type="button">Payload MCP / API</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <aside style="display:flex;flex-direction:column;gap:16px">
+      <section class="card">
+        <h2>Modelo 1: Calidad del ICP <span class="badge ok" id="icp-tier">ready</span></h2>
+        <div class="kpi"><strong id="icp-score">0</strong><span style="color:var(--mu)">/ 100 pts (antes: <span id="icp-before">0</span>)</span></div>
+        <div id="icp-dims"></div>
+        <details style="margin-top:10px">
+          <summary style="cursor:pointer;font-size:.83rem;font-weight:600">Preguntas y propuestas de ajuste del agente</summary>
+          <ul class="q-list" id="icp-questions"></ul>
+        </details>
+      </section>
+
+      <section class="card">
+        <h2>Modelo 2: Pesos de Señales Positivas <button class="btn" id="btn-reset-w" type="button" style="padding:3px 8px;font-size:.74rem">Restaurar</button></h2>
+        <p style="margin:0 0 8px;font-size:.8rem;color:var(--mu)">Ajusta la importancia de cada señal positiva para recalcular el ranking al instante.</p>
+        <div id="weight-sliders"></div>
+        <div class="slider-row" style="border-top:1px solid var(--bd);padding-top:8px">
+          <label><span>Balance ICP Fit vs Señales</span><strong id="blend-lbl">55% / 45%</strong></label>
+          <input id="blend-slider" type="range" min="10" max="90" value="55"/>
+        </div>
+      </section>
+    </aside>
+
+    <section>
+      <div class="toolbar">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <input id="search-box" class="search" type="search" placeholder="Filtrar empresa, cargo, industria o señal..."/>
+          <select id="tier-filter" class="search" style="min-width:160px">
+            <option value="all">Todos los Tiers</option>
+            <option value="Tier A">Solo Tier A</option>
+            <option value="Tier B">Solo Tier B</option>
+            <option value="Tier C">Solo Tier C</option>
+          </select>
+        </div>
+        <div id="tier-stats" style="font-size:.84rem;color:var(--mu)"></div>
+      </div>
+
+      <div id="leads-list"></div>
+
+      <section class="export-box">
+        <div class="toolbar" style="margin-bottom:8px">
+          <strong style="font-size:.92rem">Revisión en Texto &amp; Vista Previa Conector MCP / API</strong>
+          <div style="display:flex;gap:8px;align-items:center">
+            <select id="connector-select" class="search" style="min-width:190px"></select>
+          </div>
+        </div>
+        <pre id="preview-pane"></pre>
+      </section>
+    </section>
+  </main>
+</div>
+
+<script id="dl-workflow-data" type="application/json">{"icp_name":"Industrial & Logistics LATAM Growth","icp_before":{"quality_score":100.0,"readiness_tier":"ready","clarifying_questions":[],"agent_targeting_proposals":[]},"icp_after":{"quality_score":100.0,"readiness_tier":"ready","dimension_breakdown":{"company_size":{"score":20.0,"max_score":20.0,"pct":100.0,"status":"strong","gaps":[]},"industry_segment":{"score":25.0,"max_score":25.0,"pct":100.0,"status":"strong","gaps":[]},"buyer_persona":{"score":25.0,"max_score":25.0,"pct":100.0,"status":"strong","gaps":[]},"suggested_signals":{"score":20.0,"max_score":20.0,"pct":100.0,"status":"strong","gaps":[],"matched_signal_categories":["company_expansion","new_facility_or_office","new_market_entry","recent_investment"]},"geography_and_market":{"score":10.0,"max_score":10.0,"pct":100.0,"status":"strong","gaps":[]}},"normalized_icp":{"icp_name":"Industrial & Logistics LATAM Growth","company_size":{"min_employees":200,"max_employees":2000,"revenue_range_usd":"$20M - $250M","company_stage":"Mid-Market & Enterprise"},"industry_segment":{"target_industries":["Manufactura","Logística 3PL","Alimentos y Bebidas"],"sub_segments":["Autopartes","Cadena de Frío","Consumo Masivo"],"keywords":["planta industrial","centro de distribución","operaciones multi-sede"],"excluded_industries":["Gobierno","Educación","Consultoras"]},"buyer_persona":{"titles":["Director de Operaciones","Gerente de Planta","VP Supply Chain","Diretor Industrial"],"seniority":["Director","VP","Gerente","C-Level"],"departments":["Operaciones","Producción","Logística"],"pain_points":["Cuellos de botella al coordinar nuevas plantas o centros de distribución","Falta de trazabilidad operativa entre turnos y áreas de mantenimiento/compras"],"characteristics":["Gestiona operaciones multi-sede en LATAM","Lidera presupuesto de expansión operativa y mejora continua"],"kpis":["OTIF","Disponibilidad de planta","Tiempo de respuesta entre áreas"]},"suggested_signals":["Apertura de nuevas fábricas, plantas o centros de distribución","Búsqueda activa de gerentes de planta o ingenieros de operaciones","Inversión reciente o expansión a nuevos mercados en Latinoamérica"],"geography_and_market":{"countries":["México","Colombia","Chile","Brasil"],"languages":["es","pt"]},"signal_weights":{"company_expansion":25,"recent_investment":20,"active_hiring":20,"new_facility_or_office":20,"new_market_entry":15}}},"deepline_query":{"provider":"deepline","icp_name":"Industrial & Logistics LATAM Growth","filters":{"firmographics":{"industries":["Manufactura","Logística 3PL","Alimentos y Bebidas"],"sub_segments":["Autopartes","Cadena de Frío","Consumo Masivo"],"excluded_industries":["Gobierno","Educación","Consultoras"],"employee_count_min":200,"employee_count_max":2000,"countries":["México","Colombia","Chile","Brasil"]},"persona":{"titles":["Director de Operaciones","Gerente de Planta","VP Supply Chain","Diretor Industrial"],"seniority":["Director","VP","Gerente","C-Level"],"departments":["Operaciones","Producción","Logística"],"characteristics":["Gestiona operaciones multi-sede en LATAM","Lidera presupuesto de expansión operativa y mejora continua"]},"signal_monitors":["company_expansion","recent_investment","active_hiring","new_facility_or_office","new_market_entry"],"user_suggested_signals":["Apertura de nuevas fábricas, plantas o centros de distribución","Búsqueda activa de gerentes de planta o ingenieros de operaciones","Inversión reciente o expansión a nuevos mercados en Latinoamérica"]},"cli_preview":"deepline enrich waterfall --industries \"Manufactura,Logística 3PL,Alimentos y Bebidas\" --employees \"200:2000\" --titles \"Director de Operaciones,Gerente de Planta,VP Supply Chain\" --countries \"México,Colombia,Chile\" --signals \"expansion,investment,hiring,facility,market\"","mcp_tool_plan":["deepline.search_companies(filters.firmographics)","deepline.find_contacts(company_domains, filters.persona)","deepline.fetch_signals(company_domains, filters.signal_monitors)"]},"execution_mode":"dataset:sample_deepline_payload.json","weights":{"icp_fit_blend":0.55,"signal_score_blend":0.45,"positive_signal_weights":{"company_expansion":25.0,"recent_investment":20.0,"active_hiring":20.0,"new_facility_or_office":20.0,"new_market_entry":15.0},"positive_signal_labels":{"company_expansion":"Expansión de la empresa","recent_investment":"Inversiones recientes","active_hiring":"Búsqueda activa de personal","new_facility_or_office":"Apertura de fábricas, plantas u oficinas","new_market_entry":"Expansión / entrada a nuevos mercados"}},"leads":[{"lead_id":"dl-103","full_name":"Marcelo Azevedo","role":"Diretor Industrial","seniority":"Director","department":"Producción","characteristics":["Lidera presupuesto de expansión operativa y mejora continua"],"company":"SulMetal Autopeças","domain":"sulmetal.example","industry":"Manufactura","sub_segment":"Autopartes","employee_count":1150,"country":"Brasil","language":"pt","email_status":"verified","email_reference":"[email-verified-via-deepline]","linkedin_url":"https://linkedin.com/in/marcelo-azevedo-demo","source_provider":"deepline","signals":[{"signal_type":"company_expansion","summary":"Expansão operacional com nova linha de estampagem para exportação","status":"verified","source":"deepline:company_updates","recency_days":15},{"signal_type":"new_facility_or_office","summary":"Inauguração de nova fábrica e escritório regional em Campinas","status":"verified","source":"deepline:news_monitor","recency_days":26}],"scoring":{"composite_score":77.5,"icp_fit_score":100.0,"signal_score":50.0,"priority_tier":"Tier A — Alta Prioridad","icp_fit_breakdown":{"industry_pts":35.0,"size_pts":25.0,"persona_pts":30.0,"geography_pts":10.0,"disqualified_by_exclusion":false},"positive_signals_matched":[{"category":"company_expansion","category_label":"Expansión de la empresa","summary":"Expansão operacional com nova linha de estampagem para exportação","status":"verified","source":"deepline:company_updates","recency_days":15,"weight_pct":25.0,"points_contributed":25.0},{"category":"new_facility_or_office","category_label":"Apertura de fábricas, plantas u oficinas","summary":"Inauguração de nova fábrica e escritório regional em Campinas","status":"verified","source":"deepline:news_monitor","recency_days":26,"weight_pct":20.0,"points_contributed":20.0}],"other_signals":[],"conversation_angle":"Acompanhei que a SulMetal Autopeças ativou o sinal 'Expansão operacional com nova linha de estampagem para exportação'. Nessa fase de crescimento, lideranças operacionais costumam priorizar visibilidade e coordenação entre plantas e áreas."}},{"lead_id":"dl-101","full_name":"Ricardo Morales","role":"Director de Operaciones","seniority":"Director","department":"Operaciones","characteristics":["Gestiona operaciones multi-sede en LATAM","Lidera presupuesto de expansión operativa"],"company":"TermoPack Industrial","domain":"termopack.example","industry":"Manufactura","sub_segment":"Empaques Industriales","employee_count":680,"country":"México","language":"es","email_status":"verified","email_reference":"[email-verified-via-deepline]","linkedin_url":"https://linkedin.com/in/ricardo-morales-demo","source_provider":"deepline","signals":[{"signal_type":"new_facility_or_office","summary":"Apertura de nueva planta de producción automatizada en Monterrey","status":"verified","source":"deepline:news_monitor","recency_days":12},{"signal_type":"active_hiring","summary":"Búsqueda activa de Gerente de Mantenimiento y Jefe de Turno en Nuevo León","status":"verified","source":"deepline:jobs_feed","recency_days":8}],"scoring":{"composite_score":75.2,"icp_fit_score":100.0,"signal_score":45.0,"priority_tier":"Tier A — Alta Prioridad","icp_fit_breakdown":{"industry_pts":35.0,"size_pts":25.0,"persona_pts":30.0,"geography_pts":10.0,"disqualified_by_exclusion":false},"positive_signals_matched":[{"category":"new_facility_or_office","category_label":"Apertura de fábricas, plantas u oficinas","summary":"Apertura de nueva planta de producción automatizada en Monterrey","status":"verified","source":"deepline:news_monitor","recency_days":12,"weight_pct":20.0,"points_contributed":20.0},{"category":"active_hiring","category_label":"Búsqueda activa de personal","summary":"Búsqueda activa de Gerente de Mantenimiento y Jefe de Turno en Nuevo León","status":"verified","source":"deepline:jobs_feed","recency_days":8,"weight_pct":20.0,"points_contributed":20.0}],"other_signals":[],"conversation_angle":"Vi que en TermoPack Industrial tienen activa la señal 'Apertura de nueva planta de producción automatizada en Monterrey'. En esta etapa suele volverse prioritario resolver cuellos de botella al coordinar nuevas plantas o centros de distribución."}},{"lead_id":"dl-102","full_name":"Valeria Cárdenas","role":"VP Supply Chain","seniority":"VP","department":"Logística","characteristics":["Responsable de OTIF y apertura de centros de distribución"],"company":"AndesCold Logística","domain":"andescold.example","industry":"Logística 3PL","sub_segment":"Cadena de Frío","employee_count":430,"country":"Colombia","language":"es","email_status":"verified","email_reference":"[email-verified-via-deepline]","linkedin_url":"https://linkedin.com/in/valeria-cardenas-demo","source_provider":"deepline","signals":[{"signal_type":"recent_investment","summary":"Inversión reciente de capital CAPEX para ampliar flota refrigerada","status":"verified","source":"deepline:funding_tracker","recency_days":18},{"signal_type":"new_market_entry","summary":"Expansión y entrada a nuevo mercado en Perú y Ecuador","status":"verified","source":"deepline:press_wire","recency_days":22}],"scoring":{"composite_score":70.7,"icp_fit_score":95.8,"signal_score":40.0,"priority_tier":"Tier B — Prioridad Media","icp_fit_breakdown":{"industry_pts":35.0,"size_pts":25.0,"persona_pts":25.8,"geography_pts":10.0,"disqualified_by_exclusion":false},"positive_signals_matched":[{"category":"recent_investment","category_label":"Inversiones recientes","summary":"Inversión reciente de capital CAPEX para ampliar flota refrigerada","status":"verified","source":"deepline:funding_tracker","recency_days":18,"weight_pct":20.0,"points_contributed":20.0},{"category":"new_market_entry","category_label":"Expansión / entrada a nuevos mercados","summary":"Expansión y entrada a nuevo mercado en Perú y Ecuador","status":"verified","source":"deepline:press_wire","recency_days":22,"weight_pct":15.0,"points_contributed":15.0}],"other_signals":[],"conversation_angle":"Vi que en AndesCold Logística tienen activa la señal 'Inversión reciente de capital CAPEX para ampliar flota refrigerada'. En esta etapa suele volverse prioritario resolver cuellos de botella al coordinar nuevas plantas o centros de distribución."}},{"lead_id":"dl-104","full_name":"Camila Paredes","role":"Gerente de Planta","seniority":"Gerente","department":"Operaciones","characteristics":["Gestiona múltiples turnos en planta procesadora"],"company":"BioNutri Alimentos","domain":"bionutri.example","industry":"Alimentos y Bebidas","sub_segment":"Procesamiento de Alimentos","employee_count":310,"country":"Chile","language":"es","email_status":"catch_all","email_reference":"[pending-enrichment]","linkedin_url":"https://linkedin.com/in/camila-paredes-demo","source_provider":"deepline","signals":[{"signal_type":"auto_detect","summary":"Contratando analistas de calidad y nueva oficina comercial en Santiago","status":"hypothesis","source":"deepline:web_scan","recency_days":40}],"scoring":{"composite_score":56.5,"icp_fit_score":94.4,"signal_score":10.2,"priority_tier":"Tier B — Prioridad Media","icp_fit_breakdown":{"industry_pts":35.0,"size_pts":25.0,"persona_pts":24.4,"geography_pts":10.0,"disqualified_by_exclusion":false},"positive_signals_matched":[{"category":"new_facility_or_office","category_label":"Apertura de fábricas, plantas u oficinas","summary":"Contratando analistas de calidad y nueva oficina comercial en Santiago","status":"hypothesis","source":"deepline:web_scan","recency_days":40,"weight_pct":20.0,"points_contributed":10.2}],"other_signals":[],"conversation_angle":"Vi que en BioNutri Alimentos tienen activa la señal 'Contratando analistas de calidad y nueva oficina comercial en Santiago'. En esta etapa suele volverse prioritario resolver cuellos de botella al coordinar nuevas plantas o centros de distribución."}},{"lead_id":"dl-105","full_name":"Fernando Reyes","role":"Coordinador Administrativo","seniority":"Manager","department":"Administración","characteristics":["Soporte interno sin foco industrial"],"company":"NorteGrid Software","domain":"nortegrid.example","industry":"Educación","sub_segment":"EdTech","employee_count":45,"country":"México","language":"es","email_status":"unknown","email_reference":"[pending-enrichment]","linkedin_url":"https://linkedin.com/in/fernando-reyes-demo","source_provider":"deepline","signals":[{"signal_type":"active_hiring","summary":"Búsqueda activa de personal académico de soporte","status":"verified","source":"deepline:jobs_feed","recency_days":20}],"scoring":{"composite_score":12.0,"icp_fit_score":12.0,"signal_score":20.0,"priority_tier":"Tier C — Nurture / Bajo Ajuste","icp_fit_breakdown":{"industry_pts":0.0,"size_pts":0.0,"persona_pts":0.0,"geography_pts":0.0,"disqualified_by_exclusion":true,"reason":"Industria 'Educación' figura en exclusiones del ICP."},"positive_signals_matched":[{"category":"active_hiring","category_label":"Búsqueda activa de personal","summary":"Búsqueda activa de personal académico de soporte","status":"verified","source":"deepline:jobs_feed","recency_days":20,"weight_pct":20.0,"points_contributed":20.0}],"other_signals":[],"conversation_angle":"Vi que en NorteGrid Software tienen activa la señal 'Búsqueda activa de personal académico de soporte'. En esta etapa suele volverse prioritario resolver cuellos de botella al coordinar nuevas plantas o centros de distribución."}}],"connectors":{"hubspot-mcp":{"name":"HubSpot CRM","transport":"MCP / Private App API","env_endpoint":"HUBSPOT_API_URL","env_token":"HUBSPOT_ACCESS_TOKEN","mcp_tool":"hubspot.upsert_contacts_and_companies"},"lemlist-api":{"name":"Lemlist Outbound","transport":"REST API / MCP","env_endpoint":"LEMLIST_API_URL","env_token":"LEMLIST_API_KEY","mcp_tool":"lemlist.add_leads_to_campaign"},"clay-webhook":{"name":"Clay Table","transport":"Webhook / HTTP API","env_endpoint":"CLAY_WEBHOOK_URL","env_token":"CLAY_WEBHOOK_TOKEN","mcp_tool":"clay.push_rows_to_table"},"apollo-api":{"name":"Apollo.io","transport":"REST API / MCP","env_endpoint":"APOLLO_API_URL","env_token":"APOLLO_API_KEY","mcp_tool":"apollo.create_contact_list"},"salesforce-mcp":{"name":"Salesforce CRM","transport":"MCP / REST API","env_endpoint":"SALESFORCE_API_URL","env_token":"SALESFORCE_ACCESS_TOKEN","mcp_tool":"salesforce.upsert_leads"},"deepline-mcp":{"name":"Deepline Saved List","transport":"MCP Server","env_endpoint":"DEEPLINE_LIST_URL","env_token":"DEEPLINE_API_KEY","mcp_tool":"deepline.save_scored_lead_list"},"custom-api":{"name":"Plataforma / Webhook API Personalizado","transport":"HTTP POST JSON","env_endpoint":"CUSTOM_CONNECTOR_URL","env_token":"CUSTOM_CONNECTOR_TOKEN","mcp_tool":"custom_connector.push_contacts"}},"text_report":"========================================================================\nREPORTE DE SEÑALES E ICP (DEEPLINE WORKFLOW) — Industrial & Logistics LATAM Growth\n========================================================================\n\n1. AUDITORÍA Y CALIDAD DEL ICP (MODELO 1)\n------------------------------------------------------------------------\nScore de Calidad ICP: 100.0/100 (ready)\n  - company_size: 20.0/20.0 (100.0%) [strong]\n  - industry_segment: 25.0/25.0 (100.0%) [strong]\n  - buyer_persona: 25.0/25.0 (100.0%) [strong]\n  - suggested_signals: 20.0/20.0 (100.0%) [strong]\n  - geography_and_market: 10.0/10.0 (100.0%) [strong]\n\n2. EXTRACCIÓN DEEPLINE Y PESOS DEL MODELO DE SEÑALES (MODELO 2)\n------------------------------------------------------------------------\nFuente Deepline: dataset:sample_deepline_payload.json\nQuery CLI equivalente: deepline enrich waterfall --industries \"Manufactura,Logística 3PL,Alimentos y Bebidas\" --employees \"200:2000\" --titles \"Director de Operaciones,Gerente de Planta,VP Supply Chain\" --countries \"México,Colombia,Chile\" --signals \"expansion,investment,hiring,facility,market\"\nBalance Composite Score: 55% Ajuste ICP + 45% Señales Positivas\nPesos activos de señales positivas (ajustables por el usuario):\n  - Expansión de la empresa (company_expansion): 25.0%\n  - Inversiones recientes (recent_investment): 20.0%\n  - Búsqueda activa de personal (active_hiring): 20.0%\n  - Apertura de fábricas, plantas u oficinas (new_facility_or_office): 20.0%\n  - Expansión / entrada a nuevos mercados (new_market_entry): 15.0%\n\n3. RESULTADO DE EMPRESAS Y LEADS PRIORIZADOS (5 total | Tier A: 2 | Tier B: 2 | Tier C: 1)\n------------------------------------------------------------------------\n#1 | Marcelo Azevedo — Diretor Industrial @ SulMetal Autopeças (1150 emp · Manufactura · Brasil)\n     Score Total: 77.5/100 | Ajuste ICP: 100.0 | Señales: 50.0 | Tier A — Alta Prioridad\n     Señales positivas:\n       * [verified] Expansión de la empresa: Expansão operacional com nova linha de estampagem para exportação (+25.0)\n       * [verified] Apertura de fábricas, plantas u oficinas: Inauguração de nova fábrica e escritório regional em Campinas (+20.0)\n     Ángulo sugerido: Acompanhei que a SulMetal Autopeças ativou o sinal 'Expansão operacional com nova linha de estampagem para exportação'. Nessa fase de crescimento, lideranças operacionais costumam priorizar visibilidade e coordenação entre plantas e áreas.\n#2 | Ricardo Morales — Director de Operaciones @ TermoPack Industrial (680 emp · Manufactura · México)\n     Score Total: 75.2/100 | Ajuste ICP: 100.0 | Señales: 45.0 | Tier A — Alta Prioridad\n     Señales positivas:\n       * [verified] Apertura de fábricas, plantas u oficinas: Apertura de nueva planta de producción automatizada en Monterrey (+20.0)\n       * [verified] Búsqueda activa de personal: Búsqueda activa de Gerente de Mantenimiento y Jefe de Turno en Nuevo León (+20.0)\n     Ángulo sugerido: Vi que en TermoPack Industrial tienen activa la señal 'Apertura de nueva planta de producción automatizada en Monterrey'. En esta etapa suele volverse prioritario resolver cuellos de botella al coordinar nuevas plantas o centros de distribución.\n#3 | Valeria Cárdenas — VP Supply Chain @ AndesCold Logística (430 emp · Logística 3PL · Colombia)\n     Score Total: 70.7/100 | Ajuste ICP: 95.8 | Señales: 40.0 | Tier B — Prioridad Media\n     Señales positivas:\n       * [verified] Inversiones recientes: Inversión reciente de capital CAPEX para ampliar flota refrigerada (+20.0)\n       * [verified] Expansión / entrada a nuevos mercados: Expansión y entrada a nuevo mercado en Perú y Ecuador (+15.0)\n     Ángulo sugerido: Vi que en AndesCold Logística tienen activa la señal 'Inversión reciente de capital CAPEX para ampliar flota refrigerada'. En esta etapa suele volverse prioritario resolver cuellos de botella al coordinar nuevas plantas o centros de distribución.\n#4 | Camila Paredes — Gerente de Planta @ BioNutri Alimentos (310 emp · Alimentos y Bebidas · Chile)\n     Score Total: 56.5/100 | Ajuste ICP: 94.4 | Señales: 10.2 | Tier B — Prioridad Media\n     Señales positivas:\n       * [hypothesis] Apertura de fábricas, plantas u oficinas: Contratando analistas de calidad y nueva oficina comercial en Santiago (+10.2)\n     Ángulo sugerido: Vi que en BioNutri Alimentos tienen activa la señal 'Contratando analistas de calidad y nueva oficina comercial en Santiago'. En esta etapa suele volverse prioritario resolver cuellos de botella al coordinar nuevas plantas o centros de distribución.\n#5 | Fernando Reyes — Coordinador Administrativo @ NorteGrid Software (45 emp · Educación · México)\n     Score Total: 12.0/100 | Ajuste ICP: 12.0 | Señales: 20.0 | Tier C — Nurture / Bajo Ajuste\n     Señales positivas:\n       * [verified] Búsqueda activa de personal: Búsqueda activa de personal académico de soporte (+20.0)\n     Ángulo sugerido: Vi que en NorteGrid Software tienen activa la señal 'Búsqueda activa de personal académico de soporte'. En esta etapa suele volverse prioritario resolver cuellos de botella al coordinar nuevas plantas o centros de distribución.\n\n4. FORMATO DE ENTREGA Y OPCIONES DISPONIBLES\n------------------------------------------------------------------------\n=== OPCIONES DE RESULTADO DISPONIBLES ===\nElige cómo deseas exportar los resultados (siempre recibirás además la revisión en texto):\n  [1] JSON — Archivo JSON estructurado\n      Incluye auditoría de calidad del ICP, query para Deepline, pesos activos y lista completa de empresas/leads priorizados.\n  [2] CSV — Archivo CSV tabular\n      Tabla plana compatible con Excel, Google Sheets y cargas masivas de CRM.\n  [3] CONNECTOR — Lista de contactos en plataforma con conexión MCP o API\n      Genera el payload o sincroniza directo con una plataforma conectada (hubspot-mcp, lemlist-api, clay-webhook, apollo-api, salesforce-mcp, deepline-mcp, custom-api).\n  [4] ALL — Generar JSON, CSV y Payload MCP/API simultáneamente\n\nArtefactos generados en esta ejecución:\n  - json: C:/Users/santi/AppData/Local/Temp/dl_demo_verify3/scored_leads.json\n  - csv: C:/Users/santi/AppData/Local/Temp/dl_demo_verify3/scored_leads.csv\n  - connector:hubspot-mcp: C:/Users/santi/AppData/Local/Temp/dl_demo_verify3/connector_payload_hubspot-mcp.json\n  - text_review_report: C:/Users/santi/AppData/Local/Temp/dl_demo_verify3/review_report.txt\n  - html_dashboard: Demos Workflows/deepline-icp-signals-workflow/demo/index.html\n========================================================================"}</script>
+<script>
+(function(){
+  const D = JSON.parse(document.getElementById("dl-workflow-data").textContent);
+  const G = id => document.getElementById(id);
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+  const state = {
+    weights: Object.assign({}, D.weights.positive_signal_weights),
+    icpBlend: Math.round((D.weights.icp_fit_blend || 0.55) * 100),
+    previewMode: "text"
+  };
+
+  G("wf-title").textContent = "Deepline Signals — " + D.icp_name;
+  G("wf-sub").textContent = "Fuente: " + D.execution_mode + " · " + D.leads.length + " leads evaluados";
+  G("icp-score").textContent = D.icp_after.quality_score;
+  G("icp-before").textContent = D.icp_before.quality_score;
+  G("icp-tier").textContent = D.icp_after.readiness_tier;
+
+  G("icp-dims").innerHTML = Object.entries(D.icp_after.dimension_breakdown).map(([k,v]) =>
+    `<div class="dim-row"><div class="dim-head"><span>${esc(k)}</span><strong>${v.score}/${v.max_score}</strong></div><div class="bar"><span style="width:${v.pct}%"></span></div></div>`
+  ).join("");
+
+  const qItems = [];
+  (D.icp_before.clarifying_questions || []).forEach(q => qItems.push(`<li><strong>[${esc(q.dimension)}]</strong> ${esc(q.question)}</li>`));
+  (D.icp_before.agent_targeting_proposals || []).forEach(p => qItems.push(`<li><strong>Propuesta:</strong> ${esc(p.summary)}</li>`));
+  G("icp-questions").innerHTML = qItems.join("") || "<li>ICP completo sin brechas detectadas.</li>";
+
+  const connSel = G("connector-select");
+  Object.entries(D.connectors).forEach(([k,v]) => {
+    const o = document.createElement("option");
+    o.value = k;
+    o.textContent = v.name + " (" + v.transport + ")";
+    connSel.appendChild(o);
+  });
+
+  function renderSliders(){
+    G("weight-sliders").innerHTML = Object.entries(state.weights).map(([k,v]) => {
+      const lbl = D.weights.positive_signal_labels[k] || k;
+      return `<div class="slider-row"><label><span>${esc(lbl)}</span><strong id="wval-${esc(k)}">${Math.round(v)}</strong></label><input type="range" min="0" max="60" value="${Math.round(v)}" data-wkey="${esc(k)}"/></div>`;
+    }).join("");
+    G("blend-slider").value = state.icpBlend;
+    G("blend-lbl").textContent = state.icpBlend + "% / " + (100 - state.icpBlend) + "%";
+  }
+
+  function recomputeLeads(){
+    const sumW = Object.values(state.weights).reduce((a,b) => a + Number(b), 0) || 100;
+    const icpW = state.icpBlend / 100;
+    const sigW = 1 - icpW;
+    return D.leads.map(lead => {
+      const bestCat = {};
+      const matched = (lead.scoring.positive_signals_matched || []).map(s => {
+        const normW = ((state.weights[s.category] || 0) / sumW) * 100;
+        const conf = s.status === "verified" ? 1.0 : 0.6;
+        const rec = s.recency_days <= 30 ? 1.0 : (s.recency_days <= 90 ? 0.85 : 0.65);
+        const pts = Math.round(normW * conf * rec * 10) / 10;
+        if (pts > (bestCat[s.category] || 0)) bestCat[s.category] = pts;
+        return Object.assign({}, s, {points_contributed: pts});
+      });
+      const bonus = Math.max(0, Object.keys(bestCat).length - 1) * 5;
+      const sigScore = Math.min(100, Math.round((Object.values(bestCat).reduce((a,b)=>a+b,0) + bonus) * 10) / 10);
+      const icpFit = lead.scoring.icp_fit_score;
+      const disq = lead.scoring.icp_fit_breakdown && lead.scoring.icp_fit_breakdown.disqualified_by_exclusion;
+      const comp = disq ? Math.min(25, icpFit) : Math.min(100, Math.round((icpW * icpFit + sigW * sigScore) * 10) / 10);
+      const tier = comp >= 75 ? "Tier A — Alta Prioridad" : (comp >= 50 ? "Tier B — Prioridad Media" : "Tier C — Nurture / Bajo Ajuste");
+      return Object.assign({}, lead, {_live: {composite: comp, icp: icpFit, signal: sigScore, tier, matched}});
+    }).sort((a,b) => b._live.composite - a._live.composite);
+  }
+
+  function render(){
+    const q = G("search-box").value.trim().toLowerCase();
+    const tf = G("tier-filter").value;
+    const ranked = recomputeLeads();
+    const filtered = ranked.filter(l => {
+      if (tf !== "all" && !l._live.tier.startsWith(tf)) return false;
+      if (!q) return true;
+      const hay = [l.full_name, l.role, l.company, l.industry, l.country, ...(l._live.matched.map(m => m.summary))].join(" ").toLowerCase();
+      return hay.includes(q);
+    });
+
+    const ta = ranked.filter(l => l._live.tier.startsWith("Tier A")).length;
+    const tb = ranked.filter(l => l._live.tier.startsWith("Tier B")).length;
+    G("tier-stats").textContent = `Mostrando ${filtered.length} de ${ranked.length} | Tier A: ${ta} · Tier B: ${tb}`;
+
+    G("leads-list").innerHTML = filtered.map((l, idx) => {
+      const sc = l._live;
+      const sigHtml = sc.matched.length
+        ? sc.matched.map(m => `<span class="sig-tag ${m.status === 'verified' ? 'ver' : 'hyp'}"><b>${esc(m.category_label)}</b>: ${esc(m.summary)} (+${m.points_contributed})</span>`).join("")
+        : `<span class="sig-tag">Sin señales positivas fuertes</span>`;
+      return `<article class="lead-card">
+        <div class="lead-top">
+          <div>
+            <div class="lead-title">#${idx+1} ${esc(l.full_name)} — ${esc(l.role)}</div>
+            <div class="lead-meta">${esc(l.company)} · ${esc(l.employee_count)} emp · ${esc(l.industry)} · ${esc(l.country)}</div>
+          </div>
+          <div class="scores">
+            <span class="pill tot">Total ${sc.composite}</span>
+            <span class="pill">ICP ${sc.icp}</span>
+            <span class="pill">Señales ${sc.signal}</span>
+            <span class="pill">${esc(sc.tier.split(" ")[0] + " " + sc.tier.split(" ")[1])}</span>
+          </div>
+        </div>
+        <div class="sigs">${sigHtml}</div>
+        <div class="angle"><b>Ángulo sugerido:</b> ${esc(l.scoring.conversation_angle)}</div>
+      </article>`;
+    }).join("");
+
+    if (state.previewMode === "connector") {
+      const tgt = connSel.value;
+      const meta = D.connectors[tgt];
+      const payload = {
+        connector_target: tgt,
+        mcp_tool: meta.mcp_tool,
+        total_contacts: ranked.length,
+        contacts: ranked.map(l => ({
+          full_name: l.full_name, role: l.role, company: l.company, domain: l.domain,
+          composite_score: l._live.composite, icp_fit_score: l._live.icp, signal_score: l._live.signal,
+          priority_tier: l._live.tier
+        }))
+      };
+      G("preview-pane").textContent = JSON.stringify(payload, null, 2);
+    } else {
+      G("preview-pane").textContent = D.text_report;
+    }
+  }
+
+  function downloadFile(name, mime, text){
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([text], {type: mime}));
+    a.download = name;
+    a.click();
+  }
+
+  document.addEventListener("input", e => {
+    if (e.target.dataset.wkey) {
+      state.weights[e.target.dataset.wkey] = Number(e.target.value);
+      G("wval-" + e.target.dataset.wkey).textContent = e.target.value;
+      render();
+    } else if (e.target.id === "blend-slider") {
+      state.icpBlend = Number(e.target.value);
+      G("blend-lbl").textContent = state.icpBlend + "% / " + (100 - state.icpBlend) + "%";
+      render();
+    } else if (e.target.id === "search-box") {
+      render();
+    }
+  });
+
+  G("tier-filter").addEventListener("change", render);
+  connSel.addEventListener("change", () => { state.previewMode = "connector"; render(); });
+  G("btn-show-mcp").addEventListener("click", () => { state.previewMode = state.previewMode === "connector" ? "text" : "connector"; render(); });
+  G("btn-reset-w").addEventListener("click", () => {
+    state.weights = Object.assign({}, D.weights.positive_signal_weights);
+    state.icpBlend = Math.round((D.weights.icp_fit_blend || 0.55) * 100);
+    renderSliders();
+    render();
+  });
+  G("btn-theme").addEventListener("click", () => {
+    const cur = document.documentElement.getAttribute("data-theme");
+    document.documentElement.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+  });
+  G("btn-copy-txt").addEventListener("click", () => {
+    navigator.clipboard && navigator.clipboard.writeText(D.text_report);
+    state.previewMode = "text";
+    render();
+  });
+  G("btn-dl-json").addEventListener("click", () => {
+    downloadFile("deepline_scored_leads.json", "application/json", JSON.stringify(recomputeLeads(), null, 2));
+  });
+  G("btn-dl-csv").addEventListener("click", () => {
+    const rows = [["rank","full_name","role","company","industry","country","composite_score","icp_fit","signal_score","tier"]];
+    recomputeLeads().forEach((l,i) => rows.push([i+1,l.full_name,l.role,l.company,l.industry,l.country,l._live.composite,l._live.icp,l._live.signal,l._live.tier]));
+    const csvTxt = rows.map(r => r.map(v => '"' + String(v).replace(/"/g,'""') + '"').join(",")).join("\n");
+    downloadFile("deepline_scored_leads.csv", "text/csv;charset=utf-8", csvTxt);
+  });
+
+  renderSliders();
+  render();
+})();
+</script>
+</body>
+</html>

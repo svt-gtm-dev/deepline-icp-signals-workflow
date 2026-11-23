@@ -1,0 +1,16 @@
+{
+  "name": "deepline-icp-signals",
+  "displayName": "Deepline ICP & Signals Workflow",
+  "version": "1.0.0",
+  "description": "Multi-agent B2B signal-led GTM plugin powered by Deepline: ICP quality scoring, signal enrichment, customizable dual lead scoring, and JSON/CSV/MCP-API export with mandatory text review.",
+  "author": {
+    "name": "Santiago Velasquez"
+  },
+  "homepage": "https://github.com/svt-gtm-dev/deepline-icp-signals-workflow",
+  "repository": "https://github.com/svt-gtm-dev/deepline-icp-signals-workflow",
+  "suggestedPrompts": [
+    "Evalúa la calidad de mi ICP inicial y proponme ajustes de targeting antes de consultar Deepline",
+    "Ejecuta el flujo de señales con Deepline priorizando aperturas de nuevas plantas y rondas de inversión",
+    "Califica estos leads con mis pesos personalizados y despliega opciones para exportar a JSON, CSV o CRM vía MCP"
+  ]
+}

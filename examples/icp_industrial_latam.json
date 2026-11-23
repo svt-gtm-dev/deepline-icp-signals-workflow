@@ -1,0 +1,50 @@
+{
+  "icp_name": "Industrial & Logistics LATAM Growth",
+  "company_size": {
+    "min_employees": 200,
+    "max_employees": 2000,
+    "revenue_range_usd": "$20M - $250M",
+    "company_stage": "Mid-Market & Enterprise"
+  },
+  "industry_segment": {
+    "target_industries": ["Manufactura", "Logística 3PL", "Alimentos y Bebidas"],
+    "sub_segments": ["Autopartes", "Cadena de Frío", "Consumo Masivo"],
+    "keywords": ["planta industrial", "centro de distribución", "operaciones multi-sede"],
+    "excluded_industries": ["Gobierno", "Educación", "Consultoras"]
+  },
+  "buyer_persona": {
+    "titles": [
+      "Director de Operaciones",
+      "Gerente de Planta",
+      "VP Supply Chain",
+      "Diretor Industrial"
+    ],
+    "seniority": ["Director", "VP", "Gerente", "C-Level"],
+    "departments": ["Operaciones", "Producción", "Logística"],
+    "pain_points": [
+      "Cuellos de botella al coordinar nuevas plantas o centros de distribución",
+      "Falta de trazabilidad operativa entre turnos y áreas de mantenimiento/compras"
+    ],
+    "characteristics": [
+      "Gestiona operaciones multi-sede en LATAM",
+      "Lidera presupuesto de expansión operativa y mejora continua"
+    ],
+    "kpis": ["OTIF", "Disponibilidad de planta", "Tiempo de respuesta entre áreas"]
+  },
+  "suggested_signals": [
+    "Apertura de nuevas fábricas, plantas o centros de distribución",
+    "Búsqueda activa de gerentes de planta o ingenieros de operaciones",
+    "Inversión reciente o expansión a nuevos mercados en Latinoamérica"
+  ],
+  "geography_and_market": {
+    "countries": ["México", "Colombia", "Chile", "Brasil"],
+    "languages": ["es", "pt"]
+  },
+  "signal_weights": {
+    "company_expansion": 25,
+    "recent_investment": 20,
+    "active_hiring": 20,
+    "new_facility_or_office": 20,
+    "new_market_entry": 15
+  }
+}

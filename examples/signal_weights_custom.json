@@ -1,0 +1,19 @@
+{
+  "icp_weight": 0.45,
+  "signal_weight": 0.55,
+  "signal_weights": {
+    "new_facility_or_office": 35,
+    "company_expansion": 25,
+    "active_hiring": 20,
+    "recent_investment": 10,
+    "new_market_entry": 10
+  },
+  "custom_positive_signals": [
+    {
+      "key": "automation_upgrade",
+      "label": "Modernización o automatización de línea",
+      "weight": 15,
+      "keywords": ["automatizada", "modernización", "estampagem"]
+    }
+  ]
+}

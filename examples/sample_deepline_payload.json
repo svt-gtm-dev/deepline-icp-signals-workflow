@@ -1,0 +1,189 @@
+{
+  "source": "deepline_enriched_sample",
+  "companies": [
+    {
+      "company": "TermoPack Industrial",
+      "domain": "termopack.example",
+      "industry": "Manufactura",
+      "sub_segment": "Empaques Industriales",
+      "employee_count": 680,
+      "country": "México",
+      "language": "es",
+      "signals": [
+        {
+          "signal_type": "new_facility_or_office",
+          "summary": "Apertura de nueva planta de producción automatizada en Monterrey",
+          "status": "verified",
+          "source": "deepline:news_monitor",
+          "recency_days": 12
+        },
+        {
+          "signal_type": "active_hiring",
+          "summary": "Búsqueda activa de Gerente de Mantenimiento y Jefe de Turno en Nuevo León",
+          "status": "verified",
+          "source": "deepline:jobs_feed",
+          "recency_days": 8
+        }
+      ]
+    },
+    {
+      "company": "AndesCold Logística",
+      "domain": "andescold.example",
+      "industry": "Logística 3PL",
+      "sub_segment": "Cadena de Frío",
+      "employee_count": 430,
+      "country": "Colombia",
+      "language": "es",
+      "signals": [
+        {
+          "signal_type": "recent_investment",
+          "summary": "Inversión reciente de capital CAPEX para ampliar flota refrigerada",
+          "status": "verified",
+          "source": "deepline:funding_tracker",
+          "recency_days": 18
+        },
+        {
+          "signal_type": "new_market_entry",
+          "summary": "Expansión y entrada a nuevo mercado en Perú y Ecuador",
+          "status": "verified",
+          "source": "deepline:press_wire",
+          "recency_days": 22
+        }
+      ]
+    },
+    {
+      "company": "SulMetal Autopeças",
+      "domain": "sulmetal.example",
+      "industry": "Manufactura",
+      "sub_segment": "Autopartes",
+      "employee_count": 1150,
+      "country": "Brasil",
+      "language": "pt",
+      "signals": [
+        {
+          "signal_type": "company_expansion",
+          "summary": "Expansão operacional com nova linha de estampagem para exportação",
+          "status": "verified",
+          "source": "deepline:company_updates",
+          "recency_days": 15
+        },
+        {
+          "signal_type": "new_facility_or_office",
+          "summary": "Inauguração de nova fábrica e escritório regional em Campinas",
+          "status": "verified",
+          "source": "deepline:news_monitor",
+          "recency_days": 26
+        }
+      ]
+    },
+    {
+      "company": "BioNutri Alimentos",
+      "domain": "bionutri.example",
+      "industry": "Alimentos y Bebidas",
+      "sub_segment": "Procesamiento de Alimentos",
+      "employee_count": 310,
+      "country": "Chile",
+      "language": "es",
+      "signals": [
+        {
+          "signal_type": "auto_detect",
+          "summary": "Contratando analistas de calidad y nueva oficina comercial en Santiago",
+          "status": "hypothesis",
+          "source": "deepline:web_scan",
+          "recency_days": 40
+        }
+      ]
+    },
+    {
+      "company": "NorteGrid Software",
+      "domain": "nortegrid.example",
+      "industry": "Educación",
+      "sub_segment": "EdTech",
+      "employee_count": 45,
+      "country": "México",
+      "language": "es",
+      "signals": [
+        {
+          "signal_type": "active_hiring",
+          "summary": "Búsqueda activa de personal académico de soporte",
+          "status": "verified",
+          "source": "deepline:jobs_feed",
+          "recency_days": 20
+        }
+      ]
+    }
+  ],
+  "leads": [
+    {
+      "lead_id": "dl-101",
+      "full_name": "Ricardo Morales",
+      "role": "Director de Operaciones",
+      "seniority": "Director",
+      "department": "Operaciones",
+      "characteristics": [
+        "Gestiona operaciones multi-sede en LATAM",
+        "Lidera presupuesto de expansión operativa"
+      ],
+      "company": "TermoPack Industrial",
+      "domain": "termopack.example",
+      "email_status": "verified",
+      "linkedin_url": "https://linkedin.com/in/ricardo-morales-demo"
+    },
+    {
+      "lead_id": "dl-102",
+      "full_name": "Valeria Cárdenas",
+      "role": "VP Supply Chain",
+      "seniority": "VP",
+      "department": "Logística",
+      "characteristics": [
+        "Responsable de OTIF y apertura de centros de distribución"
+      ],
+      "company": "AndesCold Logística",
+      "domain": "andescold.example",
+      "email_status": "verified",
+      "linkedin_url": "https://linkedin.com/in/valeria-cardenas-demo"
+    },
+    {
+      "lead_id": "dl-103",
+      "full_name": "Marcelo Azevedo",
+      "role": "Diretor Industrial",
+      "seniority": "Director",
+      "department": "Producción",
+      "characteristics": [
+        "Lidera presupuesto de expansión operativa y mejora continua"
+      ],
+      "company": "SulMetal Autopeças",
+      "domain": "sulmetal.example",
+      "email_status": "verified",
+      "linkedin_url": "https://linkedin.com/in/marcelo-azevedo-demo"
+    },
+    {
+      "lead_id": "dl-104",
+      "full_name": "Camila Paredes",
+      "role": "Gerente de Planta",
+      "seniority": "Gerente",
+      "department": "Operaciones",
+      "characteristics": [
+        "Gestiona múltiples turnos en planta procesadora"
+      ],
+      "company": "BioNutri Alimentos",
+      "domain": "bionutri.example",
+      "email_status": "catch_all",
+      "linkedin_url": "https://linkedin.com/in/camila-paredes-demo"
+    },
+    {
+      "lead_id": "dl-105",
+      "full_name": "Fernando Reyes",
+      "role": "Coordinador Administrativo",
+      "seniority": "Manager",
+      "department": "Administración",
+      "characteristics": [
+        "Soporte interno sin foco industrial"
+      ],
+      "company": "NorteGrid Software",
+      "domain": "nortegrid.example",
+      "email_status": "unknown",
+      "linkedin_url": "https://linkedin.com/in/fernando-reyes-demo"
+    }
+  ]
+}

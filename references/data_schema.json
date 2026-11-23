@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Deepline ICP & Signals Workflow Schema",
+  "type": "object",
+  "properties": {
+    "icp_profile": {
+      "type": "object",
+      "required": ["icp_name"],
+      "properties": {
+        "icp_name": { "type": "string" },
+        "company_size": {
+          "type": "object",
+          "properties": {
+            "min_employees": { "type": "integer", "minimum": 1 },
+            "max_employees": { "type": "integer", "minimum": 1 },
+            "revenue_range_usd": { "type": "string" },
+            "company_stage": { "type": "string" }
+          }
+        },
+        "industry_segment": {
+          "type": "object",
+          "properties": {
+            "target_industries": { "type": "array", "items": { "type": "string" } },
+            "sub_segments": { "type": "array", "items": { "type": "string" } },
+            "keywords": { "type": "array", "items": { "type": "string" } },
+            "excluded_industries": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "buyer_persona": {
+          "type": "object",
+          "properties": {
+            "titles": { "type": "array", "items": { "type": "string" } },
+            "seniority": { "type": "array", "items": { "type": "string" } },
+            "departments": { "type": "array", "items": { "type": "string" } },
+            "pain_points": { "type": "array", "items": { "type": "string" } },
+            "characteristics": { "type": "array", "items": { "type": "string" } },
+            "kpis": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "suggested_signals": { "type": "array", "items": { "type": "string" } },
+        "geography_and_market": {
+          "type": "object",
+          "properties": {
+            "countries": { "type": "array", "items": { "type": "string" } },
+            "languages": { "type": "array", "items": { "type": "string", "enum": ["es", "pt", "en"] } }
+          }
+        },
+        "signal_weights": {
+          "type": "object",
+          "additionalProperties": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "deepline_record": {
+      "type": "object",
+      "required": ["lead_id", "full_name", "role", "company"],
+      "properties": {
+        "lead_id": { "type": "string" },
+        "full_name": { "type": "string" },
+        "role": { "type": "string" },
+        "seniority": { "type": "string" },
+        "department": { "type": "string" },
+        "characteristics": { "type": "array", "items": { "type": "string" } },
+        "company": { "type": "string" },
+        "domain": { "type": "string" },
+        "industry": { "type": "string" },
+        "sub_segment": { "type": "string" },
+        "employee_count": { "type": "integer", "minimum": 1 },
+        "country": { "type": "string" },
+        "language": { "type": "string", "enum": ["es", "pt", "en"] },
+        "email_status": { "type": "string", "enum": ["verified", "catch_all", "unknown"] },
+        "linkedin_url": { "type": "string" },
+        "signals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["signal_type", "summary", "status", "source"],
+            "properties": {
+              "signal_type": { "type": "string" },
+              "summary": { "type": "string" },
+              "status": { "type": "string", "enum": ["verified", "hypothesis"] },
+              "source": { "type": "string" },
+              "recency_days": { "type": "integer", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "export_options": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["json", "csv", "connector", "all"]
+      }
+    }
+  }
+}

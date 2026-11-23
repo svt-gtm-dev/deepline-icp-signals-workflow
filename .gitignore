@@ -1,0 +1,15 @@
+# Local workflow runs & private API caches
+out/
+*.local.json
+*.local.csv
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Environment & OS files
+.env
+.env.*
+.DS_Store
+Thumbs.db

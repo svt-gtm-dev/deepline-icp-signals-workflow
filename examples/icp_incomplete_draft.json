@@ -1,0 +1,15 @@
+{
+  "icp_name": "Borrador Inicial de ICP (Incompleto)",
+  "company_size": {
+    "min_employees": 150
+  },
+  "industry_segment": {
+    "target_industries": ["Manufactura"]
+  },
+  "buyer_persona": {
+    "titles": ["Gerente de Planta"]
+  },
+  "suggested_signals": [
+    "Empresa creciendo rápido"
+  ]
+}
